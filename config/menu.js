@@ -20,6 +20,35 @@ module.exports = [
   },
   {
     path: '',
+    name: 'goods',
+    label: '商品管理',
+    icon: 'picture',
+    children:[
+      {
+        path: '/goodsCate',
+        name: 'goodsCate',
+        label: '商品分类',
+        icon: 'video-camera-solid',
+        url: 'Goods/GoodsCate'
+      },
+      {
+        path: '/goodsAttr',
+        name: 'goodsAttr',
+        label: '商品类型',
+        icon: 'video-camera-solid',
+        url: 'Goods/GoodsAttr'
+      },
+      {
+        path: '/goods',
+        name: 'goods',
+        label: '商品列表',
+        icon: 'video-camera-solid',
+        url: 'Goods/Goods'
+      }
+    ]
+  },
+  {
+    path: '',
     name: 'other',
     label: '其他',
     icon: 'video-camera-solid',
