@@ -17,7 +17,14 @@ module.exports = app => {
   router.post('/login', controller.login.login);
 
   //admin
-  router.get('/manager', controller.admin.index);
-  router.post('/manager/add', controller.admin.add);
-  router.post('/manager/edit', controller.admin.edit);
+  router.get('/admin', controller.admin.index);
+  router.post('/admin/add', controller.admin.add);
+  router.post('/admin/edit', controller.admin.edit);
+  
+  //role
+  router.get('/role',controller.role.index);
+  router.post('/role/add',controller.role.add);
+
+  //focus
+  router.get('/focus',controller.focus.index);
 };
