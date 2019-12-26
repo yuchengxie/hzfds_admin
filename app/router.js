@@ -30,4 +30,5 @@ module.exports = app => {
   router.get('/focus',controller.focus.index);
   router.post('/focus/add',controller.focus.add);
   router.get('/focus/edit',controller.focus.edit);
+  router.post('/focus/doEdit',controller.focus.doEdit);
 };
