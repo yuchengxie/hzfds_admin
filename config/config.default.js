@@ -2,6 +2,7 @@
 
 'use strict';
 // import menu from './menu';
+var path = require("path");
 let menu = require('./menu.js');
 /**
  * @param {Egg.EggAppInfo} appInfo app info
@@ -15,6 +16,9 @@ module.exports = appInfo => {
 
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_1577093073011_8675';
+
+  let abcpath = path.join(__dirname, "../");
+  config.uploadDir = path.join(abcpath, "app/public/upload");
 
   // add your middleware config here
   config.middleware = [];

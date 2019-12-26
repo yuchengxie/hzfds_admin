@@ -14,6 +14,11 @@ class BaseController extends Controller {
       msg: '删除成功'
     }
   }
+
+  async upload(){
+    
+  }
+
 }
 
 module.exports = BaseController;

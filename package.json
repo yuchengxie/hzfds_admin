@@ -7,10 +7,16 @@
     "declarations": true
   },
   "dependencies": {
+    "ali-oss": "^6.3.1",
     "egg": "^2.15.1",
     "egg-cors": "^2.2.3",
     "egg-mongoose": "^3.2.0",
-    "egg-scripts": "^2.11.0"
+    "egg-scripts": "^2.11.0",
+    "jimp": "^0.9.3",
+    "md5": "^2.2.1",
+    "mz-modules": "^2.1.0",
+    "silly-datetime": "^0.1.2",
+    "svg-captcha": "^1.4.0"
   },
   "devDependencies": {
     "autod": "^3.0.1",

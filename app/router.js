@@ -11,6 +11,7 @@ module.exports = app => {
 
   //public
   router.get('/del',controller.base.del);
+  router.post('/upload',controller.base.upload);
 
   router.get('/', controller.home.index);
   router.get('/menu', controller.login.setMenu);
@@ -27,4 +28,6 @@ module.exports = app => {
 
   //focus
   router.get('/focus',controller.focus.index);
+  router.post('/focus/add',controller.focus.add);
+  router.get('/focus/edit',controller.focus.edit);
 };

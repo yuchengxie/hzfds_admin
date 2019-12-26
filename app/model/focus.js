@@ -15,7 +15,7 @@ module.exports = app => {
       type: Number,
       default: d.getTime()
     }
-  });
+  }); 
 
   return mongoose.model("Focus", FocusSchema, "focus");
 };
