@@ -33,21 +33,9 @@ class FocusController extends BaseController {
     }
   }
 
-  async edit() {
-    var id = this.ctx.request.query.id;
-    var result = await this.ctx.model.Focus.find({
-      _id: id
-    });
-    console.log('edit:', result[0]);
-    this.ctx.body = {
-      code: 20000,
-      msg: result[0]
-    }
-  }
-
-  async doEdit() {
+   async edit() {
     let params = this.ctx.request.body;
-    console.log('doEdit:',params);
+    console.log('edit:',params);
     let _id = params._id;
     await this.ctx.model.Focus.updateOne({
       _id
@@ -57,6 +45,31 @@ class FocusController extends BaseController {
       msg: '更新成功'
     }
   }
+
+  // async edit() {
+  //   var id = this.ctx.request.query.id;
+  //   var result = await this.ctx.model.Focus.find({
+  //     _id: id
+  //   });
+  //   console.log('edit:', result[0]);
+  //   this.ctx.body = {
+  //     code: 20000,
+  //     msg: result[0]
+  //   }
+  // }
+
+  // async doEdit() {
+  //   let params = this.ctx.request.body;
+  //   console.log('doEdit:',params);
+  //   let _id = params._id;
+  //   await this.ctx.model.Focus.updateOne({
+  //     _id
+  //   }, params);
+  //   this.ctx.body = {
+  //     code: 20000,
+  //     msg: '更新成功'
+  //   }
+  // }
 }
 
 module.exports = FocusController;
