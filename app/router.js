@@ -32,5 +32,7 @@ module.exports = app => {
   router.post('/focus/edit',controller.focus.edit);
 
   //cate
+  router.get('/goods/cate',controller.goodsCate.index);
   router.get('/goods/cate/top',controller.goodsCate.top);
+  router.post('/goods/cate/add',controller.goodsCate.add);
 };
