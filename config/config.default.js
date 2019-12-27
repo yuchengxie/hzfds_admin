@@ -3,7 +3,7 @@
 'use strict';
 // import menu from './menu';
 var path = require("path");
-let menu = require('./menu.js');
+let menu = require('./menu');
 /**
  * @param {Egg.EggAppInfo} appInfo app info
  */
