@@ -17,7 +17,6 @@ var BaseController = require("./base.js");
 class FocusController extends BaseController {
   async index() {
     let result = await this.ctx.model.Focus.find({});
-    console.log('focus result:', result);
     this.ctx.body = {
       code: 20000,
       msg: result

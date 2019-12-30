@@ -39,6 +39,7 @@ class AdminController extends BaseController {
       role_id: fields_s.role_id,
       is_super: fields_s.is_super
     }
+    //需要修改密码
     if (password) {
       password = await this.service.tools.md5(password);
       fields = Object.assign(fields, {

@@ -30,7 +30,7 @@ module.exports = app => {
         default: d.getTime()
       }
     });
-  
+    
     return mongoose.model("GoodsCate", GoodsCateSchema, "goods_cate");
   };
   

@@ -39,7 +39,6 @@ class ToolsService extends Service {
 
   async getTime() {
     var d = new Date();
-
     return d.getTime();
   }
 

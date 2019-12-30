@@ -5,32 +5,7 @@ var BaseController = require('./base.js');
 class AccessController extends BaseController {
 
   async index() {
-    // [
-    //   {
-    //     id: 1,
-    //     label: "用户管理模块",
-    //     children: [
-    //       {
-    //         id: 2,
-    //         label: "用户管理列表"
-    //       },
-    //     ]
-    //   }
-    // ]
-    let list=[];
-    let menu=JSON.stringify(this.config.menu);
-    console.log(menu);
-    this.ctx.body={
-      msg:'h'
-    }
     
-    
-
-    // console.log('access:', this.config.menu);
-    // this.ctx.body = {
-    //   code: 20000,
-    //   msg: this.config.menu
-    // }
   }
 
   // async index() {        

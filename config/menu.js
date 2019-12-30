@@ -45,7 +45,7 @@ module.exports = [{
     path: '',
     name: 'goods',
     label: '商品管理',
-    icon: 'picture',
+    icon: 's-shop',
     children: [{
         path: '/goods',
         name: 'goods',
@@ -77,17 +77,31 @@ module.exports = [{
         isOperate: true//操作
       },
       {
-        path: '/goodsAttr',
-        name: 'goodsAttr',
+        path: '/goodsType',
+        name: 'goodsType',
         label: '商品类型',
         icon: 'video-camera-solid',
-        url: 'Goods/Attr/Attr'
+        url: 'Goods/Type/Type'
       },
       {
-        path: '/goodsAttr/add',
-        name: 'goodsAttrAdd',
-        label: '增加商品属性',
-        url: 'Goods/Attr/Add',
+        path: '/goodsType/add',
+        name: 'goodsTypeAdd',
+        label: '增加商品类型',
+        url: 'Goods/Type/Add',
+        isOperate: true//操作
+      },
+      {
+        path: '/goodsTypeAttr',
+        name: 'goodsTypeAttr',
+        label: '商品类型属性',
+        url: 'Goods/TypeAttr/TypeAttr',
+        isOperate: true//操作
+      },
+      {
+        path: '/goodsTypeAttr',
+        name: 'goodsTypeAttrAdd',
+        label: '增加商品类型属性',
+        url: 'Goods/TypeAttr/Add',
         icon: 'picture',
         isOperate: true//操作
       },
@@ -95,21 +109,21 @@ module.exports = [{
   },
   {
     path: '',
-    name: 'other',
-    label: '其他',
-    icon: 'video-camera-solid',
+    name: 'setting',
+    label: '设置',
+    icon: 'setting',
     children: [{
-      path: '/page1',
-      name: 'page1',
-      label: '页面一',
-      icon: 'video-camera-solid',
-      url: 'Other/PageOne'
+      path: '/menu',
+      name: 'menu',
+      label: '设置菜单',
+      icon: 'files',
+      url: 'Setting/Menu'
     }, {
       path: '/page2',
       name: 'page2',
       label: '页面二',
       icon: 's-home',
-      url: 'Other/PageTwo'
+      url: 'Setting/PageTwo'
     }]
   }
 ]

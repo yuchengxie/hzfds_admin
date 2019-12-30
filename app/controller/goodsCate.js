@@ -19,7 +19,6 @@ class GoodsCateController extends Controller {
         }
       }
     ]);
-    console.log('result:', result);
     this.ctx.body = {
       code: 20000,
       msg: result
@@ -27,10 +26,10 @@ class GoodsCateController extends Controller {
   }
 
   async top() {
+    //顶级分类
     let result = await this.ctx.model.GoodsCate.find({
       pid: "0"
     });
-    console.log('top:', result);
     this.ctx.body = {
       code: 20000,
       msg: result
@@ -39,7 +38,6 @@ class GoodsCateController extends Controller {
 
   async add() {
     let parts = this.ctx.request.body;
-    console.log('parts1:', parts);
     if (parts.pid != "0") {
       parts.pid = this.app.mongoose.Types.ObjectId(parts.pid); //调用mongoose里面的方法把字符串转换成ObjectId
     }
@@ -49,6 +47,18 @@ class GoodsCateController extends Controller {
     this.ctx.body = {
       code: 20000,
       msg: '新增分类成功'
+    }
+  }
+  async edit() {
+    let fields = this.ctx.request.body;
+    console.log('edit fields:',fields);
+    let _id = fields._id;
+    await this.ctx.model.GoodsCate.updateOne({
+      _id
+    }, fields);
+    this.ctx.body = {
+      code: 20000,
+      msg: '编辑商品分类成功'
     }
   }
 }

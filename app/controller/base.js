@@ -5,6 +5,7 @@ const Controller = require('egg').Controller;
 class BaseController extends Controller {
   async del() {
     let model = this.ctx.request.query.model;
+    // URLDecoder.decode();
     let _id = this.ctx.request.query.id;
     await this.ctx.model[model].deleteOne({
       _id
@@ -15,9 +16,12 @@ class BaseController extends Controller {
     }
   }
 
-  async upload(){
-    
-  }
+  // async menu() {
+  //   this.ctx.body = {
+  //     code: 20000,
+  //     msg: this.config.menu
+  //   }
+  // }
 
 }
 

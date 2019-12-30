@@ -27,6 +27,10 @@ class LoginController extends Controller {
         menu: '用户名或密码错误',
       }
     }
+    // this.ctx.body = {
+    //   code: 20000,
+    //   menu: this.config.menu,
+    // }
   }
 }
 

@@ -11,8 +11,7 @@ module.exports = app => {
 
   //public
   router.get('/del',controller.base.del);
-  router.post('/upload',controller.base.upload);
-
+  
   router.get('/', controller.home.index);
   router.get('/menu', controller.login.setMenu);
   router.post('/login', controller.login.login);
@@ -28,15 +27,21 @@ module.exports = app => {
   router.post('/role/edit',controller.role.edit);
 
   //access
-  router.get('/access',controller.access.index);
+  // router.get('/access',controller.access.index);
 
   //focus
   router.get('/focus',controller.focus.index);
   router.post('/focus/add',controller.focus.add);
   router.post('/focus/edit',controller.focus.edit);
 
-  //cate
+  //goodscate
   router.get('/goods/cate',controller.goodsCate.index);
   router.get('/goods/cate/top',controller.goodsCate.top);
   router.post('/goods/cate/add',controller.goodsCate.add);
+  router.post('/goods/cate/edit',controller.goodsCate.edit);
+
+  //goodstype
+  router.get('/goods/type',controller.goodsType.index);
+  router.post('/goods/type/add',controller.goodsType.add);
+  router.post('/goods/type/edit',controller.goodsType.edit);
 };
