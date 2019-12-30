@@ -14,19 +14,25 @@ module.exports = [{
       name: 'user',
       label: '用户列表',
       icon: 'user',
-      url: 'User/User',
+      url: 'User/User/User',
     }, {
       path: '/role',
       name: 'role',
       label: '角色列表',
       icon: 'user',
-      url: 'User/Role',
-    }, {
+      url: 'User/Role/Role',
+    },{
       path: '/access',
       name: 'access',
       label: '权限列表',
       icon: 'user',
-      url: 'User/Access',
+      url: 'User/Access/Access',
+    },{
+      path: '/access',
+      name: 'accessAdd',
+      label: '增加权限列表',
+      url: 'User/Access/Add',
+      isOperate: true//操作
     }]
   }, {
     path: '/focus',
@@ -50,7 +56,7 @@ module.exports = [{
       {
         path: '/goods/add',
         name: 'goodsAdd',
-        label: '商品列表增加',
+        label: '增加商品列表',
         url: 'Goods/Goods/Add',
         icon: 'picture',
         isOperate: true//操作
@@ -65,7 +71,7 @@ module.exports = [{
       {
         path: '/goodsCate/add',
         name: 'goodsCateAdd',
-        label: '商品分类增加',
+        label: '增加商品分类',
         url: 'Goods/Cate/Add',
         icon: 'picture',
         isOperate: true//操作
@@ -80,7 +86,7 @@ module.exports = [{
       {
         path: '/goodsAttr/add',
         name: 'goodsAttrAdd',
-        label: '商品属性增加',
+        label: '增加商品属性',
         url: 'Goods/Attr/Add',
         icon: 'picture',
         isOperate: true//操作

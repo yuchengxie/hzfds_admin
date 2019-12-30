@@ -25,6 +25,10 @@ module.exports = app => {
   //role
   router.get('/role',controller.role.index);
   router.post('/role/add',controller.role.add);
+  router.post('/role/edit',controller.role.edit);
+
+  //access
+  router.get('/access',controller.access.index);
 
   //focus
   router.get('/focus',controller.focus.index);

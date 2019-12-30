@@ -32,7 +32,9 @@ module.exports = appInfo => {
 
   exports.mongoose = {
     url: "mongodb://admin:qwerty123@118.190.105.235:27017/hzfds_admin",
-    options: {}
+    options: {
+      // useUnifiedTopology: true,
+    }
   }
 
   //跨域设置
