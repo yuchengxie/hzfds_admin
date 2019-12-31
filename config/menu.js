@@ -3,12 +3,14 @@ module.exports = [{
     name: 'home',
     label: '首页',
     icon: 's-home',
-    url: 'Home/Home'
+    url: 'Home/Home',
+    isModule:true
   }, {
     path: '',
     name: 'user',
     label: '用户管理',
     icon: 'user',
+    isModule:true,
     children: [{
       path: '/user',
       name: 'user',
@@ -21,18 +23,18 @@ module.exports = [{
       label: '角色列表',
       icon: 'user',
       url: 'User/Role/Role',
-    },{
+    }, {
       path: '/access',
       name: 'access',
       label: '权限列表',
       icon: 'user',
       url: 'User/Access/Access',
-    },{
-      path: '/access',
+    }, {
+      path: '/accessAdd',
       name: 'accessAdd',
       label: '增加权限列表',
       url: 'User/Access/Add',
-      isOperate: true//操作
+      isOperate: true //操作
     }]
   }, {
     path: '/focus',
@@ -40,12 +42,14 @@ module.exports = [{
     label: '轮播图管理页',
     icon: 'picture',
     url: 'Focus/Focus',
+    isModule:true,
   },
   {
     path: '',
     name: 'goods',
     label: '商品管理',
     icon: 's-shop',
+    isModule:true,
     children: [{
         path: '/goods',
         name: 'goods',
@@ -59,7 +63,7 @@ module.exports = [{
         label: '增加商品列表',
         url: 'Goods/Goods/Add',
         icon: 'picture',
-        isOperate: true//操作
+        isOperate: true //操作
       },
       {
         path: '/goodsCate',
@@ -74,7 +78,7 @@ module.exports = [{
         label: '增加商品分类',
         url: 'Goods/Cate/Add',
         icon: 'picture',
-        isOperate: true//操作
+        isOperate: true //操作
       },
       {
         path: '/goodsType',
@@ -88,22 +92,22 @@ module.exports = [{
         name: 'goodsTypeAdd',
         label: '增加商品类型',
         url: 'Goods/Type/Add',
-        isOperate: true//操作
+        isOperate: true //操作
       },
       {
         path: '/goodsTypeAttr',
         name: 'goodsTypeAttr',
         label: '商品类型属性',
         url: 'Goods/TypeAttr/TypeAttr',
-        isOperate: true//操作
+        isOperate: true //操作
       },
       {
-        path: '/goodsTypeAttr',
+        path: '/goodsTypeAttrAdd',
         name: 'goodsTypeAttrAdd',
         label: '增加商品类型属性',
         url: 'Goods/TypeAttr/Add',
         icon: 'picture',
-        isOperate: true//操作
+        isOperate: true //操作
       },
     ]
   },
@@ -112,13 +116,16 @@ module.exports = [{
     name: 'setting',
     label: '设置',
     icon: 'setting',
+    isModule:true,
     children: [{
+      id: 51,
       path: '/menu',
       name: 'menu',
       label: '设置菜单',
       icon: 'files',
       url: 'Setting/Menu'
     }, {
+      id: 52,
       path: '/page2',
       name: 'page2',
       label: '页面二',

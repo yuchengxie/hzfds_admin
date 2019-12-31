@@ -4,6 +4,7 @@
 // import menu from './menu';
 var path = require("path");
 let menu = require('./menu');
+let template = require('./template');
 /**
  * @param {Egg.EggAppInfo} appInfo app info
  */
