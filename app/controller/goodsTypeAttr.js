@@ -4,27 +4,33 @@ let BaseController = require("./base");
 
 class GoodsTypeAttributeController extends BaseController {
   async index() {
-    var cate_id = this.ctx.request.query.id;
+    let type_id = this.ctx.request.query.id;
+    console.log('type_id:', type_id);
+    // var goodsTypeAttr = await this.ctx.model.GoodsTypeAttribute.find({
+    //   _id: type_id
+    // });
     var goodsTypeAttr = await this.ctx.model.GoodsTypeAttribute.aggregate([{
         $lookup: {
           from: "goods_type",
-          localField: "cate_id",
+          localField: "type_id",
           foreignField: "_id",
           as: "goods_type"
         }
       },
       {
         $match: {
-          cate_id: this.app.mongoose.Types.ObjectId(cate_id)
+          type_id: this.app.mongoose.Types.ObjectId(type_id)
         }
       }
     ]);
     let goodsType = await this.ctx.model.GoodsType.find({});
+    console.log('goodsTypeAttr:', goodsTypeAttr);
+
     this.ctx.body = {
       code: 20000,
       msg: {
-        goodsTypeAttr,
-        goodsType
+        goodsType,
+        goodsTypeAttr
       }
     }
   }

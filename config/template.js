@@ -7,9 +7,9 @@ module.exports = [{
     isModule: true
   }, {
     path: '',
-    name: 'user',
+    name: 'user_manager',
     label: '用户管理',
-    icon: 'user',
+    icon: 'userModule',
     isModule: true,
     children: []
   }, {
@@ -22,7 +22,7 @@ module.exports = [{
   },
   {
     path: '',
-    name: 'goods',
+    name: 'goodsModule',
     label: '商品管理',
     icon: 's-shop',
     isModule: true,
@@ -30,7 +30,7 @@ module.exports = [{
   },
   {
     path: '',
-    name: 'setting',
+    name: 'settingModule',
     label: '设置',
     icon: 'setting',
     isModule: true,

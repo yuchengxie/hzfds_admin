@@ -42,7 +42,13 @@ class ToolsService extends Service {
     return d.getTime();
   }
 
-  async uploadFile(stream,files) {
+
+  arrToStr(arr) {
+    if (!arr || !(arr instanceof Array)) return;
+    return arr.join(",");
+  }
+
+  async uploadFile(stream, files) {
     // var files = {};
     let fieldname = stream.fieldname; //file表单的名字
 

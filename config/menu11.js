@@ -4,13 +4,13 @@ module.exports = [{
     label: '首页',
     icon: 's-home',
     url: 'Home/Home',
-    isModule: true
+    isModule:true
   }, {
     path: '',
     name: 'userModule',
     label: '用户管理',
     icon: 'user',
-    isModule: true,
+    isModule:true,
     children: [{
       path: '/user',
       name: 'user',
@@ -23,13 +23,7 @@ module.exports = [{
       label: '角色列表',
       icon: 'user',
       url: 'User/Role/Role',
-    },  {
-      path: '/role/auth',
-      name: 'auth',
-      label: '角色授权',
-      url: 'User/Role/Auth',
-      isOperate: true //操作
-    },{
+    }, {
       path: '/access',
       name: 'access',
       label: '权限列表',
@@ -48,14 +42,14 @@ module.exports = [{
     label: '轮播图管理页',
     icon: 'picture',
     url: 'Focus/Focus',
-    isModule: true,
+    isModule:true,
   },
   {
     path: '',
     name: 'goodsModule',
     label: '商品管理',
     icon: 's-shop',
-    isModule: true,
+    isModule:true,
     children: [{
         path: '/goods',
         name: 'goods',
@@ -122,7 +116,7 @@ module.exports = [{
     name: 'settingModule',
     label: '设置',
     icon: 'setting',
-    isModule: true,
+    isModule:true,
     children: [{
       path: '/menu',
       name: 'menu',

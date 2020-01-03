@@ -4,7 +4,8 @@ module.exports = app => {
   var d = new Date();
 
   const GoodsTypeAttributeSchema = new Schema({
-    cate_id: { type: Schema.Types.ObjectId },
+    // cate_id: { type: Schema.Types.ObjectId },
+    type_id: { type: Schema.Types.ObjectId },
     title: { type: String },
     attr_type: { type: String },
     attr_value: { type: String },

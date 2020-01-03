@@ -5,7 +5,72 @@ var BaseController = require('./base.js');
 class AccessController extends BaseController {
 
   async index() {
-    
+    // let list = await this.ctx.model.Access.find({});
+    let list = await this.ctx.model.Access.aggregate([{
+        $lookup: {
+          from: "access",
+          localField: "_id",
+          foreignField: "module_id",
+          as: "items",
+        }
+      },
+      {
+        $match: {
+          module_id: "0"
+        }
+      },
+      {
+        $sort:{
+          sort:1
+        }
+      }
+    ]);
+    var modules = await this.ctx.model.Access.find({
+      "module_id": "0"
+    }, '_id module_name');
+
+    this.ctx.body = {
+      code: 20000,
+      msg: {
+        list,
+        modules
+      }
+    }
+  }
+
+  async add() {
+    var fields = this.ctx.request.body;
+    console.log('add:', fields);
+    var module_id = fields.module_id;
+
+    //菜单  或者操作
+    if (module_id != 0) {
+      fields.module_id = this.app.mongoose.Types.ObjectId(module_id);
+    }
+    var access = new this.ctx.model.Access(fields);
+    access.save();
+    this.ctx.body = {
+      code: 20000,
+      msg: '增加权限成功'
+    }
+  }
+
+  async edit() {
+    let fields = this.ctx.request.body;
+    let _id = fields._id;
+    console.log('edit:', fields);
+    console.log('_id:', _id);
+    //菜单  或者操作
+    if (fields.module_id != 0) {
+      fields.module_id = this.app.mongoose.Types.ObjectId(fields.module_id); //调用mongoose里面的方法把字符串转换成ObjectId
+    }
+    await this.ctx.model.Access.updateOne({
+      _id
+    }, fields);
+    this.ctx.body = {
+      code: 20000,
+      msg: '编辑权限成功'
+    }
   }
 
   // async index() {        
@@ -43,112 +108,109 @@ class AccessController extends BaseController {
   //       list:result
   //     });
   // } 
-  async add() {
+  // async add() {
 
 
-    //获取模块列表
+  //   //获取模块列表
 
-    var result = await this.ctx.model.Access.find({
-      "module_id": "0"
-    });
-
-
-    await this.ctx.render('admin/access/add', {
-
-      moduleList: result
-    });
-  }
-
-  async doAdd() {
-    // console.log(this.ctx.request.body);
-    try {
-      var addResult = this.ctx.request.body;
-      var module_id = addResult.module_id;
-      //菜单  或者操作
-      if (module_id != 0) {
-        addResult.module_id = this.app.mongoose.Types.ObjectId(module_id); //调用mongoose里面的方法把字符串转换成ObjectId
-      }
-      var access = new this.ctx.model.Access(addResult);
-      access.save();
-      await this.success('/admin/access', '增加权限成功');
-    } catch (error) {
-      console.log(error)
-    }
+  //   var result = await this.ctx.model.Access.find({
+  //     "module_id": "0"
+  //   });
 
 
+  //   await this.ctx.render('admin/access/add', {
+
+  //     moduleList: result
+  //   });
+  // }
+
+  // async doAdd() {
+  //   // console.log(this.ctx.request.body);
+  //   try {
+  //     var addResult = this.ctx.request.body;
+  //     var module_id = addResult.module_id;
+  //     //菜单  或者操作
+  //     if (module_id != 0) {
+  //       addResult.module_id = this.app.mongoose.Types.ObjectId(module_id); //调用mongoose里面的方法把字符串转换成ObjectId
+  //     }
+  //     var access = new this.ctx.model.Access(addResult);
+  //     access.save();
+  //     await this.success('/admin/access', '增加权限成功');
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
 
 
-
-  }
-  async edit() {
+  // async edit() {
 
 
-    var id = this.ctx.request.query.id;
+  //   var id = this.ctx.request.query.id;
 
-    //获取编辑的数据
+  //   //获取编辑的数据
 
-    var accessResult = await this.ctx.model.Access.find({
-      "_id": id
-    });
+  //   var accessResult = await this.ctx.model.Access.find({
+  //     "_id": id
+  //   });
 
 
 
-    var result = await this.ctx.model.Access.find({
-      "module_id": "0"
-    });
+  //   var result = await this.ctx.model.Access.find({
+  //     "module_id": "0"
+  //   });
 
 
-    await this.ctx.render('admin/access/edit', {
+  //   await this.ctx.render('admin/access/edit', {
 
 
-      list: accessResult[0],
+  //     list: accessResult[0],
 
-      moduleList: result
-    });
-  }
-
-
-  async doEdit() {
-    console.log(this.ctx.request.body);
-
-    /*
-    { 
+  //     moduleList: result
+  //   });
+  // }
 
 
-      id: '5b8e4422b3cc641f4894d7bc',
-      _csrf: '8F3tGQd8-w1HtBpsyUbnBSQY5Up7OOqHXYSY',
+  // async doEdit() {
+  //   console.log(this.ctx.request.body);
+
+  //   /*
+  //   { 
 
 
-      module_name: '权限管理111',
-      type: '3',
-      action_name: '增加权限1',
-      url: '/admin/access/add',
-      module_id: '5b8e3836f71aad20249c2f98',
-      sort: '100',
-      description: '增加权限---操作1111' }
-    */
-    var updateResult = this.ctx.request.body;
-
-    var id = updateResult.id;
-
-    var module_id = updateResult.module_id;
+  //     id: '5b8e4422b3cc641f4894d7bc',
+  //     _csrf: '8F3tGQd8-w1HtBpsyUbnBSQY5Up7OOqHXYSY',
 
 
+  //     module_name: '权限管理111',
+  //     type: '3',
+  //     action_name: '增加权限1',
+  //     url: '/admin/access/add',
+  //     module_id: '5b8e3836f71aad20249c2f98',
+  //     sort: '100',
+  //     description: '增加权限---操作1111' }
+  //   */
+  //   var updateResult = this.ctx.request.body;
 
-    //菜单  或者操作
-    if (module_id != 0) {
+  //   var id = updateResult.id;
 
-      updateResult.module_id = this.app.mongoose.Types.ObjectId(module_id); //调用mongoose里面的方法把字符串转换成ObjectId
-
-    }
-
-    var result = await this.ctx.model.Access.updateOne({
-      "_id": id
-    }, updateResult);
-
-    await this.success('/admin/access', '修改权限成功');
+  //   var module_id = updateResult.module_id;
 
 
-  }
+
+  //   //菜单  或者操作
+  //   if (module_id != 0) {
+
+  //     updateResult.module_id = this.app.mongoose.Types.ObjectId(module_id); //调用mongoose里面的方法把字符串转换成ObjectId
+
+  //   }
+
+  //   var result = await this.ctx.model.Access.updateOne({
+  //     "_id": id
+  //   }, updateResult);
+
+  //   await this.success('/admin/access', '修改权限成功');
+
+
+  // }
 }
 module.exports = AccessController;
