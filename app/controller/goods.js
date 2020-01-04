@@ -4,17 +4,23 @@ const Controller = require('egg').Controller;
 
 class GoodsController extends Controller {
   async index() {
-
     let goodsResult = await this.ctx.model.Goods.find({});
+    let goodsColor = await this.ctx.model.GoodsColor.find({});
     this.ctx.body = {
       code: 20000,
-      msg: goodsResult
+      msg: {
+        goodsResult,
+        goodsColor
+      }
     }
   }
 
   async add() {
     let formFields = this.ctx.request.body;
     console.log('goods add formFields:', formFields);
+    if (formFields.goods_type_id && typeof formFields.goods_type_id === 'string') {
+      formFields.goods_type_id = this.app.mongoose.Types.ObjectId(formFields.goods_type_id);
+    }
     let goods_color = this.service.tools.arrToStr(formFields.goods_color || "");
     formFields.goods_color = goods_color || "";
     //1.增加商品信息
@@ -51,6 +57,7 @@ class GoodsController extends Controller {
           let goodsAttRes = new this.ctx.model.GoodsAttr({
             goods_id: result.id,
             cate_id: formFields.cate_id,
+            type_id: formFields.goods_type_id,
             attribute_id: attr_id_list[i],
             attribute_type: goodsTypeAttributeRes[0].attr_type,
             attribute_title: goodsTypeAttributeRes[0].title,
@@ -68,8 +75,12 @@ class GoodsController extends Controller {
 
   async edit() {
     let formFields = this.ctx.request.body;
+    console.log('edit:', formFields);
+    if (formFields.goods_type_id && typeof formFields.goods_type_id === 'string') {
+      formFields.goods_type_id = this.app.mongoose.Types.ObjectId(formFields.goods_type_id);
+    }
     formFields.goods_color = this.service.tools.arrToStr(formFields.goods_color) || "";
-    let goods_id = formFields.id;
+    let goods_id = formFields._id;
     await this.ctx.model.Goods.updateOne({
       _id: goods_id
     }, formFields);
@@ -107,6 +118,7 @@ class GoodsController extends Controller {
         let goodsAttrRes = new this.ctx.model.GoodsAttr({
           goods_id: goods_id,
           cate_id: formFields.cate_id,
+          type_id: formFields.goods_type_id,
           attribute_id: attr_id_list[i],
           attribute_type: goodsTypeAttributeRes[0].attr_type,
           attribute_title: goodsTypeAttributeRes[0].title,
@@ -115,9 +127,25 @@ class GoodsController extends Controller {
         await goodsAttrRes.save();
       }
     }
-    this.ctx.body={
-      code:20000,
-      msg:'修改商品数据成功'
+    this.ctx.body = {
+      code: 20000,
+      msg: '修改商品数据成功'
+    }
+  }
+
+  async getAttrs() {
+    let params = this.ctx.request.query;
+    let type_id = params.type_id;
+    let goods_id = params.goods_id;
+    let goodsAttrs = await this.ctx.model.GoodsAttr.find({
+      type_id: type_id,
+      goods_id: goods_id
+    })
+    this.ctx.body = {
+      code: 20000,
+      msg: {
+        goodsAttrs
+      }
     }
   }
 

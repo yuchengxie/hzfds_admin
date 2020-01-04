@@ -6,7 +6,7 @@ module.exports = app => {
   const GoodsSchema = new Schema({
     title: { type: String },
     sub_title: { type: String },
-    goods_sn: { type: String },
+    goods_sn: { type: String ,default:"0000000000000_goods_sn" },
     cate_id: { type: Schema.Types.ObjectId },
     click_count: {
       type: Number,
