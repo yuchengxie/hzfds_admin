@@ -36,7 +36,7 @@ class GoodsController extends Controller {
       for (let i = 0; i < goods_image_list.length; i++) {
         let goodsImageRes = new this.ctx.model.GoodsImage({
           goods_id: result._id,
-          img_url: goods_imgage_list[i]
+          img_url: goods_image_list[i]
         })
         await goodsImageRes.save();
       }
@@ -150,10 +150,16 @@ class GoodsController extends Controller {
   }
 
   async mix() {
+    let goods_id = this.ctx.request.query.id;
+    console.log('mix goods_id:',goods_id);
     //获取所有颜色
     let goodsColor = await this.ctx.model.GoodsColor.find();
     //获取所有商品类型
     let goodsType = await this.ctx.model.GoodsType.find({});
+    //获取商品相册
+    let goodsPhoto = await this.ctx.model.GoodsImage.find({
+      goods_id: goods_id
+    });
     //获取商品分类
     let goodsCate = await this.ctx.model.GoodsCate.aggregate([{
         $lookup: {
@@ -175,7 +181,8 @@ class GoodsController extends Controller {
       msg: {
         goodsColor,
         goodsType,
-        goodsCate
+        goodsCate,
+        goodsPhoto
       }
     }
   }
