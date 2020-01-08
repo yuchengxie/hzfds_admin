@@ -8,13 +8,17 @@
   },
   "dependencies": {
     "ali-oss": "^6.3.1",
+    "bip32": "^2.0.4",
+    "bs58check": "^2.1.2",
+    "create-hash": "^1.2.0",
     "egg": "^2.15.1",
     "egg-cors": "^2.2.3",
-    "egg-mongoose": "^3.1.0", 
+    "egg-mongoose": "^3.1.0",
     "egg-scripts": "^2.11.0",
     "jimp": "^0.9.3",
     "md5": "^2.2.1",
     "mz-modules": "^2.1.0",
+    "safe-buffer": "^5.2.0",
     "silly-datetime": "^0.1.2",
     "svg-captcha": "^1.4.0"
   },

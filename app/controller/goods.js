@@ -27,7 +27,16 @@ class GoodsController extends Controller {
     let goodsRes = await this.ctx.model.Goods(formFields);
     let result = await goodsRes.save();
     //2.增加商品图库信息
-
+    // //2.1将原有数据删除
+    // let goods_id = formFields.id || "";
+    // console.log('goods_id:', goods_id);
+    // if (goods_id) {
+    //   let rrrr = await this.ctx.model.GoodsImage.deleteMany({
+    //     goods_id: goods_id
+    //   })
+    //   console.log('rrrr:', rrrr);
+    // }
+    //2.2写入新数据
     let goods_image_list = formFields.goods_image_list || "";
     if (result._id && goods_image_list) {
       if (typeof goods_image_list === 'string') {
@@ -84,7 +93,14 @@ class GoodsController extends Controller {
     await this.ctx.model.Goods.updateOne({
       _id: goods_id
     }, formFields);
+
     //修改图库信息(增加操作)
+    //2.1将原有数据删除
+    if (goods_id) {
+      let rrrr = await this.ctx.model.GoodsImage.deleteMany({
+        goods_id: goods_id
+      })
+    }
     let goods_image_list = formFields.goods_image_list;
     if (goods_id && goods_image_list) {
       if (typeof goods_image_list === 'string') {
@@ -151,7 +167,7 @@ class GoodsController extends Controller {
 
   async mix() {
     let goods_id = this.ctx.request.query.id;
-    console.log('mix goods_id:',goods_id);
+    console.log('mix goods_id:', goods_id);
     //获取所有颜色
     let goodsColor = await this.ctx.model.GoodsColor.find();
     //获取所有商品类型

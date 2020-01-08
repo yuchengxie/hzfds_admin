@@ -59,5 +59,12 @@ module.exports = app => {
   router.post('/goods/add', controller.goods.add);
   router.post('/goods/edit', controller.goods.edit);
   router.get('/goods/mix', controller.goods.mix);
-  router.get('/goods/attrlist',controller.goods.getAttrs);
+  router.get('/goods/attrlist', controller.goods.getAttrs);
+
+  //client
+  //user
+  router.post('/user/sendPhoneCode', controller.user.sendPhoneCode);
+  router.post('/user/register', controller.user.register);
+  router.post('/user/login', controller.user.login);
+  router.post('/user/logout', controller.user.logout);
 };
