@@ -38,6 +38,10 @@ module.exports = appInfo => {
     }
   }
 
+  exports.jwt = {
+    secret: "123456"
+  };
+
   //跨域设置
   config.security = {
     csrf: {
@@ -68,7 +72,6 @@ module.exports = appInfo => {
   //       return true;
   //     }
   // }
-
   return {
     ...config,
     ...userConfig,
