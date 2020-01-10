@@ -37,7 +37,7 @@ class RoleController extends BaseController {
 
 	async auth() {
 		var role_id = this.ctx.request.query.id;
-		var [accessArr, list] = await this.service.user.getAuthList(role_id);
+		var [accessArr, list] = await this.service.admin.getAuthList(role_id);
 		this.ctx.body = {
 			code: 20000,
 			msg: {
