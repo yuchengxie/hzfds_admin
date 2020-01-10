@@ -16,14 +16,17 @@ class LoginController extends Controller {
       "username": fields.username,
       "password": fields.password
     });
-    if(reuslt.length>0){
+    if (reuslt.length > 0) {
       this.ctx.body = {
-        code:20000,
-        menu: this.config.menu,
+        code: 20000,
+        msg: {
+          menu: this.config.menu,
+          admin: reuslt
+        }
       }
-    }else{
+    } else {
       this.ctx.body = {
-        code:20001,
+        code: 20001,
         menu: '用户名或密码错误',
       }
     }
