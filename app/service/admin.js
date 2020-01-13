@@ -69,6 +69,8 @@ class AdminService extends Service {
 
   //获取权限列表的方法
   async getAuthList(role_id) {
+
+    // let result =await this.ctx.model.Access.find({"_id":role_id});
     /*
      1、获取全部的权限  
 
@@ -78,21 +80,21 @@ class AdminService extends Service {
      
     */
     //1、获取全部的权限
-    var result = await this.ctx.model.Access.aggregate([
-      {
-        $lookup: {
-          from: 'access',
-          localField: '_id',
-          foreignField: 'module_id',
-          as: 'items'
-        }
-      },
-      {
-        $match: {
-          "module_id": '0'
-        }
-      }
-    ]);
+    // var result = await this.ctx.model.Access.aggregate([
+    //   {
+    //     $lookup: {
+    //       from: 'access',
+    //       localField: '_id',
+    //       foreignField: 'module_id',
+    //       as: 'items'
+    //     }
+    //   },
+    //   {
+    //     $match: {
+    //       "module_id": '0'
+    //     }
+    //   }
+    // ]);
     //2、查询当前角色拥有的权限（查询当前角色的权限id） 把查找到的数据放在数组中
     var accessReulst = await this.ctx.model.RoleAccess.find({
       "role_id": role_id
@@ -100,6 +102,7 @@ class AdminService extends Service {
     var roleAccessArray = [];
     accessReulst.forEach(function (value) {
       roleAccessArray.push(value.access_id.toString());
+      // roleAccessArray.push(value.access_id.toString());
     })
     // console.log(roleAccessArray);
     // 3、循环遍历所有的权限数据     判断当前权限是否在角色权限的数组中
@@ -113,11 +116,9 @@ class AdminService extends Service {
         }
       }
     }
-    return [roleAccessArray,result]
+    // return [roleAccessArray,result]
+    return roleAccessArray;
   }
-
-
-
 }
 
 module.exports = AdminService;

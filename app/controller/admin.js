@@ -30,6 +30,7 @@ class AdminController extends BaseController {
 
   async edit() {
     let fields_s = this.ctx.request.body;
+    console.log('fields_s:', fields_s);
     let password = fields_s.password;
     let _id = fields_s._id;
     let fields = {
@@ -37,7 +38,7 @@ class AdminController extends BaseController {
       mobile: fields_s.mobile,
       email: fields_s.email,
       role_id: fields_s.role_id,
-      is_super: fields_s.is_super
+      // is_super: fields_s.is_super
     }
     //需要修改密码
     if (password) {

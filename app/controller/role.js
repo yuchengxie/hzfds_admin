@@ -37,13 +37,19 @@ class RoleController extends BaseController {
 
 	async auth() {
 		var role_id = this.ctx.request.query.id;
-		var [accessArr, list] = await this.service.admin.getAuthList(role_id);
+		// var [accessArr, list] = await this.service.admin.getAuthList(role_id);
+		// var accessArr = await this.service.admin.getAuthList(role_id);
+		var access = await this.ctx.model.RoleAccess.find({
+			"role_id": role_id
+		});
+		var roleAccess = [];
+		access.forEach(function (value) {
+			roleAccess.push(value.access_id.toString());
+		})
 		this.ctx.body = {
 			code: 20000,
 			msg: {
-				role_id,
-				accessArr,
-				list
+				roleAccess
 			}
 		}
 	}
@@ -58,16 +64,17 @@ class RoleController extends BaseController {
 			"role_id": role_id
 		});
 		//2.将新的数据逐步添加数据库
+		// let roleAccessData=[]
 		for (let i = 0; i < access_node.length; i++) {
 			let roleAccessData = new this.ctx.model.RoleAccess({
 				role_id: role_id,
 				access_id: access_node[i]
 			})
-			roleAccessData.save();
+			await roleAccessData.save();
 		}
 		this.ctx.body = {
 			code: 20000,
-			msg: '更新权限成功'
+			msg: '更新成功'
 		}
 	}
 }

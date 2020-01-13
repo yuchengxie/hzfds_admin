@@ -60,4 +60,7 @@ module.exports = app => {
   router.post('/goods/edit', controller.goods.edit);
   router.get('/goods/mix', controller.goods.mix);
   router.get('/goods/attrlist', controller.goods.getAttrs);
+
+  //setting
+  router.post('/system/setMenu', controller.setting.setMenu);
 };

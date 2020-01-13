@@ -12,16 +12,28 @@ class LoginController extends Controller {
   async login() {
     let fields = this.ctx.request.body;
     fields.password = await this.service.tools.md5(fields.password);
-    let reuslt = await this.ctx.model.Admin.find({
+    let result = await this.ctx.model.Admin.find({
       "username": fields.username,
       "password": fields.password
     });
-    if (reuslt.length > 0) {
+    console.log('result:', result);
+    if (result.length > 0) {
+      let role_id = result[0].role_id;
+      console.log('role_id:', role_id);
+
+      let node = await this.ctx.model.RoleAccess.find({
+        "role_id": role_id
+      });
+      var access_node = [];
+      node.forEach(v => {
+        access_node.push(v.access_id.toString());
+      })
       this.ctx.body = {
         code: 20000,
         msg: {
-          menu: this.config.menu,
-          admin: reuslt
+          msg: {
+            access_node
+          }
         }
       }
     } else {
