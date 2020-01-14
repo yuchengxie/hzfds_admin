@@ -37,19 +37,13 @@ class RoleController extends BaseController {
 
 	async auth() {
 		var role_id = this.ctx.request.query.id;
-		// var [accessArr, list] = await this.service.admin.getAuthList(role_id);
-		// var accessArr = await this.service.admin.getAuthList(role_id);
-		var access = await this.ctx.model.RoleAccess.find({
-			"role_id": role_id
-		});
-		var roleAccess = [];
-		access.forEach(function (value) {
-			roleAccess.push(value.access_id.toString());
-		})
+		console.log('role_id:', role_id);
+		var [accessArr, list] = await this.service.admin.getAuthList(role_id);
 		this.ctx.body = {
 			code: 20000,
 			msg: {
-				roleAccess
+				list,
+				accessArr
 			}
 		}
 	}
@@ -59,6 +53,8 @@ class RoleController extends BaseController {
 		console.log('fields:', fields);
 		let role_id = fields.role_id;
 		let access_node = fields.access_node;
+		console.log('access_node:',access_node);
+		
 		//1.删除原有的数据
 		await this.ctx.model.RoleAccess.deleteMany({
 			"role_id": role_id

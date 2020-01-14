@@ -20,19 +20,13 @@ class LoginController extends Controller {
     if (result.length > 0) {
       let role_id = result[0].role_id;
       console.log('role_id:', role_id);
-
-      let node = await this.ctx.model.RoleAccess.find({
-        "role_id": role_id
-      });
-      var access_node = [];
-      node.forEach(v => {
-        access_node.push(v.access_id.toString());
-      })
+      var [accessArr, list] = await this.service.admin.getAuthList(role_id);
       this.ctx.body = {
         code: 20000,
         msg: {
           msg: {
-            access_node
+            accessArr,
+            list
           }
         }
       }

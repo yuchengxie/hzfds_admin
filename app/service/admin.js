@@ -80,21 +80,21 @@ class AdminService extends Service {
      
     */
     //1、获取全部的权限
-    // var result = await this.ctx.model.Access.aggregate([
-    //   {
-    //     $lookup: {
-    //       from: 'access',
-    //       localField: '_id',
-    //       foreignField: 'module_id',
-    //       as: 'items'
-    //     }
-    //   },
-    //   {
-    //     $match: {
-    //       "module_id": '0'
-    //     }
-    //   }
-    // ]);
+    var result = await this.ctx.model.Access.aggregate([
+      {
+        $lookup: {
+          from: 'access',
+          localField: '_id',
+          foreignField: 'module_id',
+          as: 'items'
+        }
+      },
+      {
+        $match: {
+          "module_id": '0'
+        }
+      }
+    ]);
     //2、查询当前角色拥有的权限（查询当前角色的权限id） 把查找到的数据放在数组中
     var accessReulst = await this.ctx.model.RoleAccess.find({
       "role_id": role_id
@@ -116,8 +116,8 @@ class AdminService extends Service {
         }
       }
     }
-    // return [roleAccessArray,result]
-    return roleAccessArray;
+    return [roleAccessArray,result]
+    // return roleAccessArray;
   }
 }
 
