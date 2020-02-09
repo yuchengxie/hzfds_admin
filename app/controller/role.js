@@ -42,8 +42,8 @@ class RoleController extends BaseController {
 		this.ctx.body = {
 			code: 20000,
 			msg: {
-				list,
-				accessArr
+				accessArr,
+				list
 			}
 		}
 	}
@@ -54,7 +54,6 @@ class RoleController extends BaseController {
 		let role_id = fields.role_id;
 		let access_node = fields.access_node;
 		console.log('access_node:',access_node);
-		
 		//1.删除原有的数据
 		await this.ctx.model.RoleAccess.deleteMany({
 			"role_id": role_id

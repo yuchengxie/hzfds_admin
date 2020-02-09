@@ -117,7 +117,6 @@ class AdminService extends Service {
       }
     }
     return [roleAccessArray,result]
-    // return roleAccessArray;
   }
 }
 

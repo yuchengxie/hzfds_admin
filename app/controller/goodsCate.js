@@ -27,12 +27,28 @@ class GoodsCateController extends Controller {
 
   async top() {
     //顶级分类
-    let result = await this.ctx.model.GoodsCate.find({
-      pid: "0"
-    });
+    // let result = await this.ctx.model.GoodsCate.find({
+    //   pid: "0"
+    // });
+
+    let list = await this.ctx.model.GoodsCate.aggregate([{
+        $lookup: {
+          from: "goods_cate",
+          localField: "_id",
+          foreignField: "pid",
+          as: "items",
+        }
+      },
+      {
+        $match: {
+          pid: "0"
+        }
+      }
+    ]);
+    console.log('list:', list);
     this.ctx.body = {
       code: 20000,
-      msg: result
+      msg: list
     }
   }
 
@@ -42,17 +58,21 @@ class GoodsCateController extends Controller {
       parts.pid = this.app.mongoose.Types.ObjectId(parts.pid); //调用mongoose里面的方法把字符串转换成ObjectId
     }
     let goodsCate = new this.ctx.model.GoodsCate(parts);
-    console.log('parts2:', parts);
     await goodsCate.save();
     this.ctx.body = {
       code: 20000,
       msg: '新增分类成功'
     }
   }
+
   async edit() {
     let fields = this.ctx.request.body;
-    console.log('edit fields:',fields);
     let _id = fields._id;
+
+    if (fields.pid != "0") {
+      fields.pid = this.app.mongoose.Types.ObjectId(fields.pid); //调用mongoose里面的方法把字符串转换成ObjectId
+    }
+
     await this.ctx.model.GoodsCate.updateOne({
       _id
     }, fields);
