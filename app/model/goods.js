@@ -6,7 +6,7 @@ module.exports = app => {
   const GoodsSchema = new Schema({
     title: { type: String },
     sub_title: { type: String },
-    goods_sn: { type: String ,default:"0000000000000_goods_sn" },
+    goods_sn: { type: String, default: "00000000000000000000000000000000" },
     cate_id: { type: Schema.Types.ObjectId },
     click_count: {
       type: Number,
@@ -18,11 +18,11 @@ module.exports = app => {
     },
     shop_price: {
       type: Number,
-      defautl:0
+      defautl: 0
     },
     market_price: {
       type: Number,
-      default:0
+      default: 0
     },
     relation_goods: {
       type: String
@@ -49,11 +49,11 @@ module.exports = app => {
     },
     goods_keywords: {
       type: String,
-      default:''
+      default: ''
     },
     goods_desc: {
       type: String,
-      default:''
+      default: ''
     },
     goods_content: {
       type: String
@@ -81,8 +81,15 @@ module.exports = app => {
     add_time: {
       type: Number,
       default: d.getTime()
+    },
+    publish_time: {//发布时间预设
+      type: Number,
+      default: d.getTime()
+    },
+    deliver_time: {//出货时间
+      type: Number,
+      default: d.getTime()
     }
   });
-
   return mongoose.model("Goods", GoodsSchema, "goods");
 };
